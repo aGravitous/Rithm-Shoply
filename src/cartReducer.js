@@ -1,8 +1,9 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from './actionsTypes';
+import { ADD_TO_CART, REMOVE_FROM_CART } from './actionTypes';
 
 const INITIAL_STATE = { itemsInCart: [] };
 
 function cartReducer(state = INITIAL_STATE, action) {
+
     switch (action.type) {
         case ADD_TO_CART:
             return {
@@ -11,11 +12,18 @@ function cartReducer(state = INITIAL_STATE, action) {
             }
 
         case REMOVE_FROM_CART:
-            return {
-                ...state,
-                itemsInCart: state.itemsInCart.filter(
-                    item => item.id !== action.id
-                )
+            const itemIdx = state.itemsInCart.findIndex(item => item.id === action.id)
+
+            if (itemIdx !== -1) {
+                return {
+                    ...state,
+                    itemsInCart: [
+                        ...state.itemsInCart.slice(0, itemIdx),
+                        ...state.itemsInCart.slice(itemIdx + 1)
+                    ]
+                }
+            } else {
+                return state;
             }
 
         default:

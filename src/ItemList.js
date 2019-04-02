@@ -3,23 +3,38 @@ import { addToCart, removeFromCart } from './actions'
 import { connect } from 'react-redux';
 import './ItemList.css';
 import Item from './Item';
+import db from './items.json'
 
 
 class ItemList extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: db.items
+        }
+    }
+
     render() {
-        const itemsList = this.props.itemsInCart.map(
+        const idSet = new Set(this.props.itemsInCart.reduce(
+            (acc, item) => [...acc, item.id], [])
+        )
+        const itemsList = this.state.items.map(
             item => <Item key={item.id}
-                          name={item.name}
-                          price={item.price}
-                          image_url={item.image_url}
-                          handleAdd={() => this.props.addToCart(item)}
-                          handRemove={() => this.props.removeFromCart(item.id)}
-                          />);
+                name={item.name}
+                price={item.price}
+                image_url={item.image_url}
+                handleAdd={() => this.props.addToCart(item)}
+                handleRemove={() => this.props.removeFromCart(item.id)}
+                showRemoveButton={ idSet.has(item.id) }
+            />);
 
         return (
             <div>
-                <p>There are {this.props.itemsInCart.length} items in your cart</p>
-                {itemsList}
+                <h2>There are {this.props.itemsInCart.length} items in your cart</h2>
+                <div className="ItemList">
+                    {itemsList}
+                </div>
             </div>
         );
     }

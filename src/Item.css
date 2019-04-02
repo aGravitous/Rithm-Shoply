@@ -1,0 +1,7 @@
+.item {
+    width: 300px;
+}
+
+.item > img {
+    max-width: 80%;
+}   
