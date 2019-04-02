@@ -14,16 +14,12 @@ function cartReducer(state = INITIAL_STATE, action) {
         case REMOVE_FROM_CART:
             const itemIdx = state.itemsInCart.findIndex(item => item.id === action.id)
 
-            if (itemIdx !== -1) {
-                return {
-                    ...state,
-                    itemsInCart: [
-                        ...state.itemsInCart.slice(0, itemIdx),
-                        ...state.itemsInCart.slice(itemIdx + 1)
-                    ]
-                }
-            } else {
-                return state;
+            return {
+                ...state,
+                itemsInCart: [
+                    ...state.itemsInCart.slice(0, itemIdx),
+                    ...state.itemsInCart.slice(itemIdx + 1)
+                ]
             }
 
         default:

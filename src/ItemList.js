@@ -16,9 +16,10 @@ class ItemList extends Component {
     }
 
     render() {
-        const idSet = new Set(this.props.itemsInCart.reduce(
-            (acc, item) => [...acc, item.id], [])
-        )
+        const idSet = this.props.itemsInCart.reduce(
+            (set, { id }) => set.add(id), 
+            new Set())
+        
         const itemsList = this.state.items.map(
             item => <Item key={item.id}
                 name={item.name}
