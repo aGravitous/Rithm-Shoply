@@ -19,7 +19,7 @@ class Cart extends Component {
 
     getCartItems() {
         const { items, itemsInCart } = this.props;
-        return items.filter( item => itemsInCart[item.id] !== 0)
+        return items.filter( item => itemsInCart[item.id])
     }
 
     render() {
@@ -37,7 +37,7 @@ class Cart extends Component {
 
         return (
             <div>
-                <h2>There are {this.getItemCount()} items in your cart</h2>
+                <h2>Total items in cart: {this.getItemCount()}</h2>
                 <div className="ItemList">
                     {itemsList}
                 </div>

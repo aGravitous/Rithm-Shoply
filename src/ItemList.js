@@ -3,8 +3,6 @@ import { addToCart, removeFromCart } from './actions'
 import { connect } from 'react-redux';
 import './ItemList.css';
 import Item from './Item';
-import db from './items.json'
-
 
 class ItemList extends Component {
 

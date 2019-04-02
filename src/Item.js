@@ -9,7 +9,7 @@ class Item extends Component {
 
     showRemoveButton() {
         return (
-            <button onClick={ this.props.handleRemove }>Remove from cart</button>
+            <button onClick={ this.props.handleRemove }> Remove </button>
         )
     }
 
@@ -20,7 +20,7 @@ class Item extends Component {
             <div className="item">
                 <img src={ image_url } alt={ name } />
                 <h3>{ name }: { `$${price}` }</h3>
-                <button onClick={ handleAdd }>Add to cart</button><br/>
+                <button onClick={ handleAdd }> Add </button><br/>
                 { currentNumberInCart ? this.showRemoveButton() : null}
                 { showQuantity && <p>Quantity: { currentNumberInCart } </p> }
             </div>
