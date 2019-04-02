@@ -27,8 +27,7 @@ class ItemList extends Component {
                 image_url={item.image_url}
                 handleAdd={() => this.props.addToCart(item)}
                 handleRemove={() => this.props.removeFromCart(item.id)}
-                showRemoveButton={ idSet.has(item.id) }
-            />);
+                showRemoveButton={ idSet.has(item.id) } />);
 
         return (
             <div>
