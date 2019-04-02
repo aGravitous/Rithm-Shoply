@@ -21,7 +21,7 @@ class Item extends Component {
                 <img src={ image_url } alt={ name } />
                 <h3>{ name }: { `$${price}` }</h3>
                 <button onClick={ handleAdd }>Add to cart</button><br/>
-                { showRemoveButton ? this.showRemoveButton() : null }
+                { showRemoveButton && this.showRemoveButton() }
             </div>
         )
     }
