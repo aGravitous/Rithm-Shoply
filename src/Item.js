@@ -14,7 +14,7 @@ class Item extends Component {
     }
 
     render() {
-        const { name, price, image_url, handleAdd, currentNumberInCart } = this.props;
+        const { name, price, image_url, handleAdd, currentNumberInCart, showQuantity } = this.props;
         
         return (
             <div className="item">
@@ -22,6 +22,7 @@ class Item extends Component {
                 <h3>{ name }: { `$${price}` }</h3>
                 <button onClick={ handleAdd }>Add to cart</button><br/>
                 { currentNumberInCart ? this.showRemoveButton() : null}
+                { showQuantity && <p>Quantity: { currentNumberInCart } </p> }
             </div>
         )
     }

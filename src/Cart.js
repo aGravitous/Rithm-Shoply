@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { addToCart, removeFromCart } from './actions'
 import { connect } from 'react-redux';
-import './ItemList.css';
 import Item from './Item';
-import db from './items.json'
 
-
-class ItemList extends Component {
+class Cart extends Component {
 
     getItemCount() {
         const { itemsInCart } = this.props;
@@ -20,16 +17,22 @@ class ItemList extends Component {
         return itemCount;
     }
 
+    getCartItems() {
+        const { items, itemsInCart } = this.props;
+        return items.filter( item => itemsInCart[item.id] !== 0)
+    }
+
     render() {
     
-        const itemsList = this.props.items.map(
+        const itemsList = this.getCartItems().map(
             item => <Item key={item.id}
                 name={item.name}
                 price={item.price}
                 image_url={item.image_url}
                 handleAdd={() => this.props.addToCart(item.id)}
                 handleRemove={() => this.props.removeFromCart(item.id)}
-                currentNumberInCart={ this.props.itemsInCart[item.id] } />);
+                currentNumberInCart={ this.props.itemsInCart[item.id] } 
+                showQuantity={true} />);
 
 
         return (
@@ -57,4 +60,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ItemList);
+)(Cart);
