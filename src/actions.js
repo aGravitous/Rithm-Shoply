@@ -1,9 +1,9 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from './actionTypes';
 
-export function addToCart(item) {
+export function addToCart(id) {
     return {
         type: ADD_TO_CART,
-        item
+        id
     }
 }
 

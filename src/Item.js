@@ -4,7 +4,7 @@ import './Item.css'
 class Item extends Component {
 
     shouldComponentUpdate(nextProps) {
-        return nextProps.showRemoveButton !== this.props.showRemoveButton;
+        return nextProps.currentNumberInCart !== this.props.currentNumberInCart;
     }
 
     showRemoveButton() {
@@ -14,14 +14,14 @@ class Item extends Component {
     }
 
     render() {
-        const { name, price, image_url, handleAdd, showRemoveButton } = this.props;
+        const { name, price, image_url, handleAdd, currentNumberInCart } = this.props;
         
         return (
             <div className="item">
                 <img src={ image_url } alt={ name } />
                 <h3>{ name }: { `$${price}` }</h3>
                 <button onClick={ handleAdd }>Add to cart</button><br/>
-                { showRemoveButton && this.showRemoveButton() }
+                { currentNumberInCart ? this.showRemoveButton() : null}
             </div>
         )
     }

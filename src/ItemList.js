@@ -8,36 +8,37 @@ import db from './items.json'
 
 class ItemList extends Component {
 
-    constructor(props) {
-        //  Fixme move items to props or the like
-        super(props);
-        this.state = {
-            items: db.items
+    static defaultProps = {
+        items: db.items
+    }
+
+    getItemCount() {
+        const { itemsInCart } = this.props;
+        let itemCount = 0;
+        
+        for (let key in itemsInCart ) {
+            if (itemsInCart[key]) {
+                itemCount += itemsInCart[key];
+            }
         }
+        return itemCount;
     }
 
     render() {
-        // Some magic made by Ethan
-
-        // let set = new Set()
-        // for (let item of this.props.itemsInCart) { set.add(item.id)}
-
-        const idSet = this.props.itemsInCart.reduce(
-            (set, { id }) => set.add(id), 
-            new Set())
-        
-        const itemsList = this.state.items.map(
+    
+        const itemsList = this.props.items.map(
             item => <Item key={item.id}
                 name={item.name}
                 price={item.price}
                 image_url={item.image_url}
-                handleAdd={() => this.props.addToCart(item)}
+                handleAdd={() => this.props.addToCart(item.id)}
                 handleRemove={() => this.props.removeFromCart(item.id)}
-                showRemoveButton={ idSet.has(item.id) } />);
+                currentNumberInCart={ this.props.itemsInCart[item.id] } />);
+
 
         return (
             <div>
-                <h2>There are {this.props.itemsInCart.length} items in your cart</h2>
+                <h2>There are {this.getItemCount()} items in your cart</h2>
                 <div className="ItemList">
                     {itemsList}
                 </div>
