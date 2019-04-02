@@ -5,6 +5,7 @@ import Item from './Item';
 
 class Cart extends Component {
 
+    // Fixme Use a Map!
     getItemCount() {
         const { itemsInCart } = this.props;
         let itemCount = 0;
