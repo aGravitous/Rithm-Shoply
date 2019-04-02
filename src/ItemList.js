@@ -9,6 +9,7 @@ import db from './items.json'
 class ItemList extends Component {
 
     constructor(props) {
+        //  Fixme move items to props or the like
         super(props);
         this.state = {
             items: db.items
@@ -16,6 +17,11 @@ class ItemList extends Component {
     }
 
     render() {
+        // Some magic made by Ethan
+
+        // let set = new Set()
+        // for (let item of this.props.itemsInCart) { set.add(item.id)}
+
         const idSet = this.props.itemsInCart.reduce(
             (set, { id }) => set.add(id), 
             new Set())
@@ -27,8 +33,7 @@ class ItemList extends Component {
                 image_url={item.image_url}
                 handleAdd={() => this.props.addToCart(item)}
                 handleRemove={() => this.props.removeFromCart(item.id)}
-                showRemoveButton={ idSet.has(item.id) }
-            />);
+                showRemoveButton={ idSet.has(item.id) } />);
 
         return (
             <div>
