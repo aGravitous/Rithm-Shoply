@@ -1,7 +1,7 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from './actionTypes';
+import { ADD_TO_CART, REMOVE_FROM_CART, ADD_DISCOUNT } from './actionTypes';
 
 // CONSIDER: same facts in two places. Consider object of ids. Frequency counter.
-const INITIAL_STATE = { itemsInCart: {} };
+const INITIAL_STATE = { itemsInCart: {}, discount: 0 };
 
 function cartReducer(state = INITIAL_STATE, action) {
 
@@ -22,6 +22,12 @@ function cartReducer(state = INITIAL_STATE, action) {
                     ...state.itemsInCart,
                     [action.id]: state.itemsInCart[action.id] - 1
                 }
+            }
+
+        case ADD_DISCOUNT:
+            return {
+                ...state,
+                discount: action.discount
             }
 
         default:
